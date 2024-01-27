@@ -12,6 +12,7 @@ import { BsSnow } from "react-icons/bs"
 import { PiSwimmingPoolFill } from "react-icons/pi";
 import { LiaMountainSolid } from "react-icons/lia";
 import { IoDiamond } from "react-icons/io5"
+import { Suspense } from "react"
 
 export const categories = [  
     {
@@ -104,18 +105,20 @@ const Categories = () => {
     }
 
     return (
-        <Container>
-            <div className="pt-4 flex flex-row items-center overflow-x-auto justify-between">
-                {categories.map(item => (
-                    <CategoryBox 
-                        key={item.label}
-                        label={item.label}
-                        selected={category === item.label}
-                        icon={item.icon}
-                    />
-                ))}
-            </div>
-        </Container>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Container>
+                <div className="pt-4 flex flex-row items-center overflow-x-auto justify-between">
+                    {categories.map(item => (
+                        <CategoryBox 
+                            key={item.label}
+                            label={item.label}
+                            selected={category === item.label}
+                            icon={item.icon}
+                        />
+                    ))}
+                </div>
+            </Container>
+        </Suspense>
     )
 }
 
