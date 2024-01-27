@@ -56,6 +56,7 @@ const RentModal = () => {
     const bathroomCount = watch('bathrooms');
     const imgSrc = watch('imgSrc');
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const Map = useMemo(() => dynamic(() => import('../Map'), { ssr: false }), [location])
 
     const customValuesSet = (id: string, value: any) => {
