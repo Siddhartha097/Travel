@@ -11,6 +11,7 @@ import LoginModal from '@/components/Modal/LoginModal';
 import getCurrentUser from '@/actions/getCurrentUser';
 import RentModal from '@/components/Modal/RentModal';
 import SearchModal from '@/components/Modal/SearchModal';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 const nunito = Nunito({ subsets: ['latin'], weight: ['500', '600', '700']});
@@ -39,15 +40,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <ToasterProvider />
-        <RentModal />
-        <SearchModal />
-        <LoginModal />
-        <RegisterModal />
-        <Navbar currUser={currUser} />
-        <div className='pb-20 pt-28'>
-          {children}
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ToasterProvider />
+          <RentModal />
+          <SearchModal />
+          <LoginModal />
+          <RegisterModal />
+          <Navbar currUser={currUser} />
+          <div className='pb-20 pt-28'>
+            {children}
+          </div>
+        </Suspense>
       </body>
     </html>
   )
